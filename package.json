@@ -1,0 +1,26 @@
+{
+  "name": "snooker-score-tracker",
+  "version": "1.0.0",
+  "description": "Snooker Score Tracker - A responsive web app for tracking snooker game scores",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/css/input.css -o ./public/css/styles.css --minify",
+    "watch:css": "tailwindcss -i ./src/css/input.css -o ./public/css/styles.css --watch",
+    "dev": "npm run watch:css",
+    "build": "npm run build:css"
+  },
+  "keywords": [
+    "snooker",
+    "score-tracker",
+    "game",
+    "responsive"
+  ],
+  "author": "Zeeshan Zounr",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.5.1"
+  }
+}
