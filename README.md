@@ -2,6 +2,8 @@
 
 A fully responsive, interactive web application for tracking snooker game scores for up to 6 players. Built with modern web technologies including Tailwind CSS and Font Awesome, all loaded locally for offline use.
 
+> **Note:** The original single-file version (`Score Tracker.htm`) is still available in the root directory. The new modular version is in the `public/` directory with improved structure, local dependencies, and Tailwind CSS styling.
+
 ## ✨ Features
 
 - 🎮 **Multi-Player Support**: Track scores for up to 6 players simultaneously
@@ -41,8 +43,18 @@ npm run build
 ```
 
 4. Open the application:
-   - Open `public/index.html` in your web browser
-   - Or use a local development server like Live Server
+   - **Option 1:** Open `public/index.html` directly in your web browser
+   - **Option 2:** Use a local development server:
+     ```bash
+     # Using Python
+     python3 -m http.server 8080 --directory public
+     # Then open http://localhost:8080 in your browser
+     
+     # Using Node.js
+     npx http-server public -p 8080
+     # Then open http://localhost:8080 in your browser
+     ```
+   - **Option 3:** Use the original single-file version by opening `Score Tracker.htm`
 
 ### Development Mode
 
