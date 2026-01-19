@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+public/css/styles.css
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+
+# Temporary files
+*.log
+*.tmp

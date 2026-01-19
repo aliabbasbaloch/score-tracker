@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🎱 Snooker Score Tracker</title>
+    
+    <!-- Local Font Awesome -->
+    <link rel="stylesheet" href="./assets/@fortawesome/fontawesome-free/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="bg-primary-bg text-text-primary min-h-screen p-2.5 text-sm overflow-x-hidden" style="background-image: radial-gradient(circle at 20% 30%, rgba(255, 221, 0, 0.03) 0%, transparent 20%), radial-gradient(circle at 80% 80%, rgba(51, 255, 119, 0.03) 0%, transparent 20%);">
+    <div class="container max-w-full mx-auto px-1.5">
+        <!-- Header -->
+        <header class="text-center mb-4 p-3 bg-secondary-bg rounded-xl border border-border-color relative overflow-hidden">
+            <h1 class="text-xl mb-1 text-snooker-blue tracking-wide flex items-center justify-center gap-2.5">
+                <i class="fas fa-billiard-ball"></i> 🎱 Snooker Score Tracker
+            </h1>
+            <div class="text-text-secondary text-xs italic mt-1 flex items-center justify-center gap-1.5">
+                👨‍💻 By Zeeshan Zounr
+            </div>
+            <p class="text-text-secondary text-[0.85rem] flex items-center justify-center gap-1.5 mt-1">
+                <i class="fas fa-users"></i> Track scores for up to 6 players
+            </p>
+        </header>
+
+        <!-- Add Player Section -->
+        <section class="bg-secondary-bg rounded-xl p-3 mb-3 border border-border-color">
+            <div class="flex gap-2">
+                <input 
+                    type="text" 
+                    id="playerNameInput" 
+                    placeholder="Player name 👤" 
+                    maxlength="15" 
+                    autocapitalize="words"
+                    class="flex-1 px-3 py-2.5 bg-accent-bg border border-border-color rounded-lg text-text-primary text-[0.95rem] h-11 focus:outline-none focus:ring-2 focus:ring-snooker-blue"
+                >
+                <button 
+                    class="px-3.5 py-2.5 border-none rounded-lg font-semibold cursor-pointer transition-all duration-200 flex items-center justify-center gap-1.5 text-sm whitespace-nowrap h-11 min-w-[60px] bg-gradient-to-br from-snooker-blue to-blue-600 text-white shadow-[0_3px_8px_rgba(0,102,255,0.2)] hover:from-blue-600 hover:to-snooker-blue active:scale-[0.98]" 
+                    id="addPlayerBtn"
+                >
+                    <i class="fas fa-plus"></i> Add
+                </button>
+            </div>
+        </section>
+
+        <!-- Players List -->
+        <section class="bg-secondary-bg rounded-xl p-3 mb-3 border border-border-color max-h-[180px] overflow-y-auto">
+            <h3 class="text-base mb-2.5 text-text-primary flex items-center gap-1.5 pl-1">
+                <i class="fas fa-users"></i> Players
+            </h3>
+            <div class="flex flex-col gap-2" id="playersList">
+                <!-- Players will be added here dynamically -->
+            </div>
+        </section>
+
+        <!-- Target Score -->
+        <div class="bg-accent-bg p-2.5 rounded-lg mb-3 border border-border-color flex items-center justify-center">
+            <label for="targetScoreSelect" class="mr-2 text-text-secondary text-sm whitespace-nowrap flex items-center gap-1.5">
+                <i class="fas fa-bullseye"></i> Target Score:
+            </label>
+            <select 
+                id="targetScoreSelect"
+                class="bg-secondary-bg text-text-primary border border-border-color px-2.5 py-1.5 rounded-md text-sm min-w-[120px] focus:outline-none focus:ring-2 focus:ring-snooker-blue cursor-pointer"
+            >
+                <option value="100">100 Points</option>
+                <option value="150" selected>150 Points</option>
+                <option value="200">200 Points</option>
+                <option value="250">250 Points</option>
+            </select>
+        </div>
+
+        <!-- Current Player Display -->
+        <section class="bg-accent-bg rounded-xl p-3 mb-3 border border-border-color text-center relative overflow-hidden">
+            <div class="text-[0.85rem] text-text-secondary mb-1 flex items-center justify-center gap-1.5">
+                <i class="fas fa-user"></i> Current Player
+            </div>
+            <div class="text-xl font-bold text-snooker-green mb-2 overflow-hidden text-ellipsis whitespace-nowrap px-1.5 flex items-center justify-center gap-2" id="currentPlayerName">
+                🎱 Select player
+            </div>
+            <div class="text-4xl font-bold text-snooker-green mb-1.5 text-shadow-lg" id="currentPlayerScore">
+                0
+            </div>
+            <div class="text-base text-snooker-yellow font-bold hidden items-center justify-center gap-1.5" id="currentPlayerRemaining"></div>
+        </section>
+
+        <!-- Balls Grid -->
+        <section class="bg-secondary-bg rounded-xl p-3 mb-3 border border-border-color">
+            <h3 class="text-base mb-2.5 text-text-primary flex items-center gap-1.5 pl-1">
+                <i class="fas fa-futbol"></i> 🎱 Scoring
+            </h3>
+            <div class="grid grid-cols-3 md:grid-cols-4 gap-2" id="ballsGrid">
+                <!-- Balls will be added here dynamically -->
+            </div>
+        </section>
+
+        <!-- Action Buttons -->
+        <div class="grid grid-cols-2 gap-2 mb-3">
+            <button 
+                class="px-2 py-3 rounded-lg border-none font-semibold cursor-pointer transition-all duration-200 flex items-center justify-center gap-1.5 text-sm text-center min-h-[44px] shadow-[0_3px_6px_rgba(0,0,0,0.2)] active:scale-[0.98] bg-gradient-to-br from-snooker-red to-red-700 text-white hover:from-red-700 hover:to-snooker-red" 
+                id="subtractBtn"
+            >
+                <i class="fas fa-minus"></i> 🔄 Subtract Mode
+            </button>
+            <button 
+                class="px-2 py-3 rounded-lg border-none font-semibold cursor-pointer transition-all duration-200 flex items-center justify-center gap-1.5 text-sm text-center min-h-[44px] shadow-[0_3px_6px_rgba(0,0,0,0.2)] active:scale-[0.98] bg-gradient-to-br from-yellow-600 to-yellow-700 text-white hover:from-yellow-700 hover:to-yellow-600" 
+                id="undoBtn"
+            >
+                <i class="fas fa-undo"></i> ↩️ Undo
+            </button>
+            <button 
+                class="px-2 py-3 rounded-lg border-none font-semibold cursor-pointer transition-all duration-200 flex items-center justify-center gap-1.5 text-sm text-center min-h-[44px] shadow-[0_3px_6px_rgba(0,0,0,0.2)] active:scale-[0.98] bg-gradient-to-br from-snooker-green to-green-600 text-white hover:from-green-600 hover:to-snooker-green" 
+                id="nextPlayerBtn"
+            >
+                <i class="fas fa-user-circle"></i> ⏭️ Next Player
+            </button>
+            <button 
+                class="px-2 py-3 rounded-lg border-none font-semibold cursor-pointer transition-all duration-200 flex items-center justify-center gap-1.5 text-sm text-center min-h-[44px] shadow-[0_3px_6px_rgba(0,0,0,0.2)] active:scale-[0.98] bg-gradient-to-br from-snooker-blue to-blue-700 text-white hover:from-blue-700 hover:to-snooker-blue" 
+                id="resetBtn"
+            >
+                <i class="fas fa-redo"></i> 🆕 New Game
+            </button>
+        </div>
+
+        <!-- Game Over Section -->
+        <div id="gameOverSection" class="hidden">
+            <!-- Will be shown when game is over -->
+        </div>
+
+        <!-- History -->
+        <section class="bg-secondary-bg rounded-xl p-3 border border-border-color max-h-[180px] overflow-y-auto mb-3">
+            <h3 class="text-base mb-2.5 text-text-primary flex items-center gap-1.5 pl-1">
+                <i class="fas fa-history"></i> 📜 History
+            </h3>
+            <div class="flex flex-col gap-1.5" id="historyList">
+                <div class="text-center p-5 text-text-secondary italic text-sm flex flex-col items-center gap-2">
+                    <i class="fas fa-clock text-2xl"></i>
+                    No actions yet
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center pt-3 border-t border-border-color text-text-secondary text-xs leading-relaxed">
+            <div class="flex justify-center flex-wrap gap-2 mt-1.5 mb-1.5">
+                <div class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/5">🟡 Yellow (2)</div>
+                <div class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/5">🟢 Green (3)</div>
+                <div class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/5">🟤 Brown (4)</div>
+                <div class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/5">🔵 Blue (5)</div>
+                <div class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/5">🌸 Pink (6)</div>
+                <div class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/5">⚫ Black (7)</div>
+                <div class="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/5">🔴 Red (10)</div>
+            </div>
+            <p class="mt-1.5 text-snooker-yellow flex items-center justify-center gap-1.5">
+                <i class="fas fa-info-circle"></i> Remaining score shows when 20 points left
+            </p>
+            <p class="mt-2 text-text-secondary/70 text-[0.7rem]">
+                Keyboard shortcuts: 1-7 (balls), S (subtract), Z (undo), N (next), Ctrl+R (reset)
+            </p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="./js/app.js"></script>
+</body>
+</html>
